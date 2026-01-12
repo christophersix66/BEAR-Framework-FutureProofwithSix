@@ -63,8 +63,14 @@
       letter-spacing: 1px;
     }
 
+    /* Mode Section */
+    .mode-section {
+      margin-bottom: 24px;
+    }
+
     /* Mode Toggles */
-    .mode-toggles {
+    .mode-toggles,
+    .mode-section {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -789,47 +795,6 @@
       </div>
       <p class="subtitle">Break → Expand → Ascend → Rule</p>
     </div>
-    <div class="mode-toggles">
-      <div class="mode-explainer">
-        <div class="mode-option">
-          <span class="mode-key">T</span>
-          <span class="mode-name-label">Tactical</span>
-          <span class="mode-desc-short">Attacker objectives — what they're trying to do</span>
-        </div>
-        <div class="mode-option">
-          <span class="mode-key">D</span>
-          <span class="mode-name-label">Defensive</span>
-          <span class="mode-desc-short">Full picture — objectives + controls + detections</span>
-        </div>
-        <div class="mode-option">
-          <span class="mode-key">X</span>
-          <span class="mode-name-label">Executive</span>
-          <span class="mode-desc-short">Business lens — controls + questions to ask</span>
-        </div>
-      </div>
-      <div class="mode-buttons">
-        <button class="mode-btn" data-mode="tactical">Tactical</button>
-        <button class="mode-btn" data-mode="defensive">Defensive</button>
-        <button class="mode-btn" data-mode="executive">Executive</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Active Mode Indicator -->
-  <div class="mode-indicator" id="modeIndicator">
-    <span class="mode-indicator-label">Active View:</span>
-    <span class="mode-indicator-value" id="modeValue">NONE</span>
-    <span class="mode-indicator-desc" id="modeDesc">— Select a mode to see phase details</span>
-  </div>
-
-  <!-- Overlay Toggles -->
-  <div class="overlay-section">
-    <span class="overlay-label">Overlays:</span>
-    <button class="overlay-btn" data-framework="mitre">MITRE ATT&CK</button>
-    <button class="overlay-btn" data-framework="nist">NIST CSF</button>
-    <button class="overlay-btn" data-framework="iso">ISO 27001</button>
-    <button class="overlay-btn" data-framework="cis">CIS Controls</button>
-    <button class="clear-btn" id="clearOverlays">Clear All</button>
   </div>
 
   <!-- BEAR Explainer Card -->
@@ -898,9 +863,52 @@
 
       <div class="explainer-section">
         <div class="explainer-label">How to Use This Tool</div>
-        <p class="explainer-text">Select a <strong>view mode</strong> above based on your role. Click any <strong>phase card</strong> below to expand details. Toggle <strong>framework overlays</strong> to see mappings to MITRE, NIST, ISO, or CIS.</p>
+        <p class="explainer-text">Select a <strong>view mode</strong> below based on your role. Click any <strong>phase card</strong> to expand details. Toggle <strong>framework overlays</strong> to see mappings to MITRE, NIST, ISO, or CIS.</p>
       </div>
     </div>
+  </div>
+
+  <!-- Mode Selection -->
+  <div class="mode-section">
+    <div class="mode-explainer">
+      <div class="mode-option">
+        <span class="mode-key">T</span>
+        <span class="mode-name-label">Tactical</span>
+        <span class="mode-desc-short">Attacker objectives — what they're trying to do</span>
+      </div>
+      <div class="mode-option">
+        <span class="mode-key">D</span>
+        <span class="mode-name-label">Defensive</span>
+        <span class="mode-desc-short">Full picture — objectives + controls + detections</span>
+      </div>
+      <div class="mode-option">
+        <span class="mode-key">X</span>
+        <span class="mode-name-label">Executive</span>
+        <span class="mode-desc-short">Business lens — controls + questions to ask</span>
+      </div>
+    </div>
+    <div class="mode-buttons">
+      <button class="mode-btn" data-mode="tactical">Tactical</button>
+      <button class="mode-btn" data-mode="defensive">Defensive</button>
+      <button class="mode-btn" data-mode="executive">Executive</button>
+    </div>
+  </div>
+
+  <!-- Active Mode Indicator -->
+  <div class="mode-indicator" id="modeIndicator">
+    <span class="mode-indicator-label">Active View:</span>
+    <span class="mode-indicator-value" id="modeValue">NONE</span>
+    <span class="mode-indicator-desc" id="modeDesc">— Select a mode to see phase details</span>
+  </div>
+
+  <!-- Overlay Toggles -->
+  <div class="overlay-section">
+    <span class="overlay-label">Overlays:</span>
+    <button class="overlay-btn" data-framework="mitre">MITRE ATT&CK</button>
+    <button class="overlay-btn" data-framework="nist">NIST CSF</button>
+    <button class="overlay-btn" data-framework="iso">ISO 27001</button>
+    <button class="overlay-btn" data-framework="cis">CIS Controls</button>
+    <button class="clear-btn" id="clearOverlays">Clear All</button>
   </div>
 
   <!-- Phase Cards -->
@@ -951,6 +959,10 @@
           </div>
           <div class="defense-item">
             <span class="defense-name">Attack Surface Monitoring</span>
+            <span class="defense-priority high">HIGH</span>
+          </div>
+          <div class="defense-item">
+            <span class="defense-name">Auth Anomaly Detection</span>
             <span class="defense-priority high">HIGH</span>
           </div>
           <div class="defense-item">
@@ -1063,6 +1075,10 @@
             <span class="defense-priority critical">CRITICAL</span>
           </div>
           <div class="defense-item">
+            <span class="defense-name">Behavior Drift Detection</span>
+            <span class="defense-priority critical">CRITICAL</span>
+          </div>
+          <div class="defense-item">
             <span class="defense-name">Zero Trust / ZTNA</span>
             <span class="defense-priority high">HIGH</span>
           </div>
@@ -1085,6 +1101,7 @@
             <span class="detection-tag">New persistence mechanisms</span>
             <span class="detection-tag">Unusual cloud API calls</span>
             <span class="detection-tag">Bulk file share access</span>
+            <span class="detection-tag">Behavioral baseline deviation</span>
           </div>
         </div>
 
@@ -1176,6 +1193,10 @@
           <div class="defense-item">
             <span class="defense-name">AD Tiering Model</span>
             <span class="defense-priority critical">CRITICAL</span>
+          </div>
+          <div class="defense-item">
+            <span class="defense-name">Privileged Behavior Analytics</span>
+            <span class="defense-priority high">HIGH</span>
           </div>
           <div class="defense-item">
             <span class="defense-name">Credential Guard / LAPS</span>
@@ -1290,6 +1311,10 @@
           <div class="defense-item">
             <span class="defense-name">Data Loss Prevention (DLP)</span>
             <span class="defense-priority critical">CRITICAL</span>
+          </div>
+          <div class="defense-item">
+            <span class="defense-name">Data Access Analytics</span>
+            <span class="defense-priority high">HIGH</span>
           </div>
           <div class="defense-item">
             <span class="defense-name">Incident Response Plan</span>
@@ -1559,6 +1584,5 @@
       }
     });
   </script>
-
 </body>
 </html>
