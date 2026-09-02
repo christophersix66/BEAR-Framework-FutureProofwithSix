@@ -5,6 +5,7 @@ Maintainer: Christopher Six (@christophersix66)
 Profile: https://github.com/christophersix66
 """
 
+import shutil
 from pathlib import Path
 
 from reportlab.lib import colors
@@ -25,6 +26,7 @@ from reportlab.platypus import (
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "output" / "pdf" / "BEAR-Framework-Defensive-Controls-v2.0.pdf"
+PUBLISHED_PDF = ROOT / "BEAR-Framework-Defensive-Controls.pdf"
 
 INK = colors.HexColor("#18212B")
 MUTED = colors.HexColor("#5A6775")
@@ -486,7 +488,9 @@ def build():
     ])
 
     doc.build(story)
-    print(OUTPUT)
+    shutil.copy2(OUTPUT, PUBLISHED_PDF)
+    print(f"Built {OUTPUT}")
+    print(f"Published {PUBLISHED_PDF}")
 
 
 if __name__ == "__main__":

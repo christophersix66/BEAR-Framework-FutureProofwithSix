@@ -5,6 +5,7 @@ Maintainer: Christopher Six (@christophersix66)
 Profile: https://github.com/christophersix66
 """
 
+import hashlib
 import re
 import sys
 from html.parser import HTMLParser
@@ -18,6 +19,7 @@ HTML_PATH = ROOT / "bear-framework.html"
 README_PATH = ROOT / "README.md"
 MAPPINGS_PATH = ROOT / "MAPPINGS.md"
 PDF_PATH = ROOT / "output" / "pdf" / "BEAR-Framework-Defensive-Controls-v2.0.pdf"
+PUBLISHED_PDF_PATH = ROOT / "BEAR-Framework-Defensive-Controls.pdf"
 
 
 class StructureParser(HTMLParser):
@@ -89,12 +91,19 @@ def main():
     require(html.count('aria-pressed="false"') >= 6, "Toggle buttons must expose their state")
 
     require(PDF_PATH.exists(), "Version 2.0 PDF is missing")
+    require(PUBLISHED_PDF_PATH.exists(), "Root-level published PDF is missing")
+    require(
+        hashlib.sha256(PDF_PATH.read_bytes()).digest()
+        == hashlib.sha256(PUBLISHED_PDF_PATH.read_bytes()).digest(),
+        "Root-level PDF does not match the versioned v2.0 artifact",
+    )
     pdf = PdfReader(str(PDF_PATH))
     require(len(pdf.pages) == 8, "Version 2.0 PDF should contain eight pages")
     metadata = pdf.metadata or {}
     require(metadata.get("/Author") == "Christopher Six (@christophersix66)", "PDF author metadata is incorrect")
     require(metadata.get("/Creator") == "Christopher Six (@christophersix66)", "PDF creator metadata is incorrect")
-    require("./output/pdf/BEAR-Framework-Defensive-Controls-v2.0.pdf" in readme, "README PDF link is missing")
+    require("./BEAR-Framework-Defensive-Controls.pdf" in readme, "README root PDF link is missing")
+    require("Current release: v2.0" in readme, "README current-release banner is missing")
 
     print("BEAR Framework content verification passed")
 
@@ -105,4 +114,3 @@ if __name__ == "__main__":
     except AssertionError as exc:
         print(f"verification failed: {exc}", file=sys.stderr)
         raise SystemExit(1)
-

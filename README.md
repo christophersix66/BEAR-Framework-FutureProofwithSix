@@ -4,6 +4,10 @@
 
 A concise practitioner model for communicating attacker progression when speed and shared context matter.
 
+> **Current release: v2.0 — September 2, 2026**
+>
+> [Download the updated PDF](./BEAR-Framework-Defensive-Controls.pdf) · [Open the interactive reference](./bear-framework.html) · [Review the mapping rationale](./MAPPINGS.md)
+
 ## What is BEAR?
 
 BEAR reduces an intrusion to four operational questions:
@@ -17,11 +21,11 @@ BEAR reduces an intrusion to four operational questions:
 
 BEAR is a communication layer, not a replacement for MITRE ATT&CK, the Lockheed Martin Cyber Kill Chain, NIST CSF, ISO/IEC 27001, or CIS Controls. Intrusions are not always linear: attackers can revisit phases, pursue several phases in parallel, or achieve impact without completing every phase.
 
-## Interactive tool
+## Reference formats
 
 Open [`bear-framework.html`](./bear-framework.html) directly in a browser. It is a single-file, offline-capable reference with no build step and no runtime dependencies.
 
-The printable reference is [`BEAR-Framework-Defensive-Controls-v2.0.pdf`](./output/pdf/BEAR-Framework-Defensive-Controls-v2.0.pdf).
+The printable reference is published at the repository root as [`BEAR-Framework-Defensive-Controls.pdf`](./BEAR-Framework-Defensive-Controls.pdf). The versioned build artifact is retained under [`output/pdf`](./output/pdf/BEAR-Framework-Defensive-Controls-v2.0.pdf).
 
 - **Tactical view** — attacker objectives and representative behaviors
 - **Defensive view** — objectives, priority controls, and detection opportunities
