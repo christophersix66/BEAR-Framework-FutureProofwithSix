@@ -1,12 +1,18 @@
 <!DOCTYPE html>
+<!--
+  BEAR Framework interactive reference
+  Maintainer: Christopher Six (@christophersix66)
+  Profile: https://github.com/christophersix66
+  Mapping register: MAPPINGS.md
+  Version: 2.0 (2026-09-02)
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BEAR Framework | Tactical Reference</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="author" content="Christopher Six (@christophersix66)">
+  <meta name="description" content="BEAR Framework v2.0 interactive reference: Break, Expand, Ascend, Rule.">
+  <title>BEAR Framework v2.0 | Interactive Reference</title>
   <style>
     * {
       margin: 0;
@@ -21,6 +27,28 @@
       font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
       padding: 20px;
       line-height: 1.5;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -80px;
+      z-index: 1000;
+      padding: 10px 14px;
+      border-radius: 4px;
+      background: #E5E5E5;
+      color: #0A0A0B;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    button:focus-visible,
+    [role="button"]:focus-visible,
+    a:focus-visible {
+      outline: 2px solid #4ECDC4;
+      outline-offset: 3px;
     }
 
     /* Header */
@@ -298,6 +326,21 @@
     }
 
     .explainer-text strong {
+      color: #E5E5E5;
+    }
+
+    .mapping-note {
+      padding: 12px;
+      border: 1px solid #2A2A2D;
+      border-left: 3px solid #4ECDC4;
+      border-radius: 6px;
+      background: #0A0A0B;
+      color: #9A9A9D;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .mapping-note strong {
       color: #E5E5E5;
     }
 
@@ -727,6 +770,11 @@
       color: #E5E5E5;
     }
 
+    .version-line {
+      width: 100%;
+      color: #6B7280;
+    }
+
     /* View mode specific visibility - hide all by default */
     .expanded-content .tactical-content,
     .expanded-content .defensive-content,
@@ -782,16 +830,36 @@
       font-size: 11px;
       color: #6B7280;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      body { padding: 12px; }
+      .bear-explainer { padding: 16px; }
+      .bear-flow { align-items: flex-start; flex-direction: column; }
+      .bear-flow-arrow { transform: rotate(90deg); margin-left: 8px; }
+      .mode-buttons, .overlay-section { align-items: stretch; }
+      .mode-btn, .overlay-btn, .clear-btn { min-height: 44px; }
+      .credit-separator { display: none; }
+    }
   </style>
 </head>
-<body>
+<body class="mode-defensive">
+
+  <a class="skip-link" href="#phases">Skip to phases</a>
 
   <!-- Header -->
   <div class="header">
     <div>
       <div class="logo-section">
         <h1 class="logo">BEAR</h1>
-        <span class="logo-label">Framework</span>
+        <span class="logo-label">Framework v2.0</span>
       </div>
       <p class="subtitle">Break → Expand → Ascend → Rule</p>
     </div>
@@ -803,14 +871,14 @@
       <div class="explainer-icon">⚡</div>
       <div>
         <h2 class="explainer-title">What is BEAR?</h2>
-        <p class="explainer-subtitle">A practitioner's model for when speed matters</p>
+        <p class="explainer-subtitle">A concise practitioner model for communicating attacker progression</p>
       </div>
     </div>
     
     <div class="explainer-content">
       <div class="explainer-section">
         <div class="explainer-label">The Problem</div>
-        <p class="explainer-text">MITRE ATT&CK is perfect for building detections. Lockheed Kill Chain is great for campaign analysis. But in the heat of an engagement or incident — they're overhead, not guidance. Too many boxes. Not enough focus.</p>
+        <p class="explainer-text">Established frameworks provide depth, but responders and decision-makers also need a fast shared view of attacker progression. BEAR supplies that communication layer without replacing the underlying standards.</p>
       </div>
       
       <div class="explainer-section">
@@ -819,22 +887,22 @@
         <div class="bear-flow">
           <div class="bear-flow-item">
             <span class="bear-letter" style="color: #FF6B35;">B</span>
-            <span class="bear-question">Did they get in?</span>
+            <span class="bear-question">Did the adversary get in?</span>
           </div>
           <div class="bear-flow-arrow">→</div>
           <div class="bear-flow-item">
             <span class="bear-letter" style="color: #F7C94B;">E</span>
-            <span class="bear-question">How far did they move?</span>
+            <span class="bear-question">How far did the adversary move?</span>
           </div>
           <div class="bear-flow-arrow">→</div>
           <div class="bear-flow-item">
             <span class="bear-letter" style="color: #4ECDC4;">A</span>
-            <span class="bear-question">Did they get real power?</span>
+            <span class="bear-question">Did the adversary gain privileged control?</span>
           </div>
           <div class="bear-flow-arrow">→</div>
           <div class="bear-flow-item">
             <span class="bear-letter" style="color: #E63946;">R</span>
-            <span class="bear-question">What can they do now?</span>
+            <span class="bear-question">What impact can the adversary create?</span>
           </div>
         </div>
       </div>
@@ -865,6 +933,10 @@
         <div class="explainer-label">How to Use This Tool</div>
         <p class="explainer-text">Select a <strong>view mode</strong> below based on your role. Click any <strong>phase card</strong> to expand details. Toggle <strong>framework overlays</strong> to see mappings to MITRE, NIST, ISO, or CIS.</p>
       </div>
+
+      <div class="mapping-note">
+        <strong>Mapping scope:</strong> These are representative practitioner alignments, not official crosswalks or one-to-one equivalences. NIST entries are outcomes rather than products; ISO Annex A selection remains risk-based; ATT&amp;CK techniques are non-exhaustive. Priority labels are a starting point and must be tailored to organizational risk. Reviewed 2026-09-02 against ATT&amp;CK v19.2, NIST CSF 2.0, ISO/IEC 27001:2022, and CIS Controls v8.1.
+      </div>
     </div>
   </div>
 
@@ -888,34 +960,34 @@
       </div>
     </div>
     <div class="mode-buttons">
-      <button class="mode-btn" data-mode="tactical">Tactical</button>
-      <button class="mode-btn" data-mode="defensive">Defensive</button>
-      <button class="mode-btn" data-mode="executive">Executive</button>
+      <button type="button" class="mode-btn" data-mode="tactical" aria-pressed="false">Tactical</button>
+      <button type="button" class="mode-btn active" data-mode="defensive" aria-pressed="true">Defensive</button>
+      <button type="button" class="mode-btn" data-mode="executive" aria-pressed="false">Executive</button>
     </div>
   </div>
 
   <!-- Active Mode Indicator -->
   <div class="mode-indicator" id="modeIndicator">
     <span class="mode-indicator-label">Active View:</span>
-    <span class="mode-indicator-value" id="modeValue">NONE</span>
-    <span class="mode-indicator-desc" id="modeDesc">— Select a mode to see phase details</span>
+    <span class="mode-indicator-value" id="modeValue">DEFENSIVE</span>
+    <span class="mode-indicator-desc" id="modeDesc">— Full picture: objectives + controls + detections</span>
   </div>
 
   <!-- Overlay Toggles -->
   <div class="overlay-section">
     <span class="overlay-label">Overlays:</span>
-    <button class="overlay-btn" data-framework="mitre">MITRE ATT&CK</button>
-    <button class="overlay-btn" data-framework="nist">NIST CSF</button>
-    <button class="overlay-btn" data-framework="iso">ISO 27001</button>
-    <button class="overlay-btn" data-framework="cis">CIS Controls</button>
-    <button class="clear-btn" id="clearOverlays">Clear All</button>
+    <button type="button" class="overlay-btn" data-framework="mitre" aria-pressed="false">MITRE ATT&amp;CK v19.2</button>
+    <button type="button" class="overlay-btn" data-framework="nist" aria-pressed="false">NIST CSF 2.0</button>
+    <button type="button" class="overlay-btn" data-framework="iso" aria-pressed="false">ISO/IEC 27001:2022</button>
+    <button type="button" class="overlay-btn" data-framework="cis" aria-pressed="false">CIS Controls v8.1</button>
+    <button type="button" class="clear-btn" id="clearOverlays">Clear All</button>
   </div>
 
   <!-- Phase Cards -->
-  <div class="phases-grid">
+  <main class="phases-grid" id="phases">
 
     <!-- BREAK -->
-    <div class="phase-card" data-phase="break" style="--phase-color: #FF6B35; --phase-color-bg: rgba(255, 107, 53, 0.08); --phase-color-30: rgba(255, 107, 53, 0.3);">
+    <div class="phase-card" data-phase="break" role="button" tabindex="0" aria-expanded="false" aria-controls="break-details" style="--phase-color: #FF6B35; --phase-color-bg: rgba(255, 107, 53, 0.08); --phase-color-30: rgba(255, 107, 53, 0.3);">
       <div class="phase-number">01</div>
       <div class="phase-header">
         <div class="phase-badge">B</div>
@@ -924,14 +996,14 @@
           <div class="phase-tagline">Outside → Inside</div>
         </div>
       </div>
-      <p class="phase-description">The moment "outside" becomes "inside". No Break = No Penetration.</p>
+      <p class="phase-description">The adversary establishes an initial foothold from outside the defended environment.</p>
       <div class="key-question-box">
         <div class="key-question-label">Key Question</div>
-        <div class="key-question-text">Did we get in?</div>
+        <div class="key-question-text">Did the adversary get in?</div>
       </div>
       <div class="expand-indicator">▼</div>
 
-      <div class="expanded-content">
+      <div class="expanded-content" id="break-details">
         <!-- Attacker Objectives -->
         <div class="content-section tactical-content">
           <div class="section-label">Attacker Objectives</div>
@@ -992,50 +1064,51 @@
 
         <!-- Framework Overlays -->
         <div class="framework-overlay mitre-overlay">
-          <div class="framework-label mitre">MITRE ATT&CK</div>
+          <div class="framework-label mitre">MITRE ATT&amp;CK v19.2</div>
           <div class="framework-tactics">Initial Access (TA0001) • Execution (TA0002)</div>
           <div class="framework-tags">
-            <span class="framework-tag mitre">T1190 Exploit Public-Facing App</span>
+            <span class="framework-tag mitre">T1190 Exploit Public-Facing Application</span>
             <span class="framework-tag mitre">T1133 External Remote Services</span>
             <span class="framework-tag mitre">T1078 Valid Accounts</span>
             <span class="framework-tag mitre">T1566 Phishing</span>
+            <span class="framework-tag mitre">T1204 User Execution</span>
           </div>
         </div>
 
         <div class="framework-overlay nist-overlay">
           <div class="framework-label nist">NIST CSF 2.0</div>
           <div class="framework-tags">
-            <span class="framework-tag nist">ID.AM-1/2 Asset Inventory</span>
-            <span class="framework-tag nist">ID.RA-1 Vuln Scanning</span>
-            <span class="framework-tag nist">PR.AC-7 MFA</span>
-            <span class="framework-tag nist">PR.DS-1 WAF</span>
+            <span class="framework-tag nist">ID.AM-01/02 Asset Inventories</span>
+            <span class="framework-tag nist">ID.RA-01 Vulnerability Identification</span>
+            <span class="framework-tag nist">PR.AA-03 Authentication</span>
+            <span class="framework-tag nist">PR.IR-01 Network Protection</span>
           </div>
         </div>
 
         <div class="framework-overlay iso-overlay">
-          <div class="framework-label iso">ISO 27001:2022</div>
+          <div class="framework-label iso">ISO/IEC 27001:2022 Annex A</div>
           <div class="framework-tags">
-            <span class="framework-tag iso">A.5.9 Asset Inventory</span>
-            <span class="framework-tag iso">A.8.8 Vuln Management</span>
-            <span class="framework-tag iso">A.8.5 Authentication</span>
-            <span class="framework-tag iso">A.8.20 Network Security</span>
+            <span class="framework-tag iso">A.5.9 Inventory of Information and Assets</span>
+            <span class="framework-tag iso">A.8.8 Technical Vulnerability Management</span>
+            <span class="framework-tag iso">A.8.5 Secure Authentication</span>
+            <span class="framework-tag iso">A.8.20 Networks Security</span>
           </div>
         </div>
 
         <div class="framework-overlay cis-overlay">
-          <div class="framework-label cis">CIS Controls v8</div>
+          <div class="framework-label cis">CIS Controls v8.1</div>
           <div class="framework-tags">
-            <span class="framework-tag cis">1.1 Asset Inventory</span>
-            <span class="framework-tag cis">7.1-7.5 Vuln Management</span>
+            <span class="framework-tag cis">1.1/2.1 Asset and Software Inventories</span>
+            <span class="framework-tag cis">7.6/7.7 External Scanning and Remediation</span>
             <span class="framework-tag cis">6.3-6.5 MFA</span>
-            <span class="framework-tag cis">13.10 WAF</span>
+            <span class="framework-tag cis">13.10 Application-Layer Filtering</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- EXPAND -->
-    <div class="phase-card" data-phase="expand" style="--phase-color: #F7C94B; --phase-color-bg: rgba(247, 201, 75, 0.08); --phase-color-30: rgba(247, 201, 75, 0.3);">
+    <div class="phase-card" data-phase="expand" role="button" tabindex="0" aria-expanded="false" aria-controls="expand-details" style="--phase-color: #F7C94B; --phase-color-bg: rgba(247, 201, 75, 0.08); --phase-color-30: rgba(247, 201, 75, 0.3);">
       <div class="phase-number">02</div>
       <div class="phase-header">
         <div class="phase-badge">E</div>
@@ -1044,14 +1117,14 @@
           <div class="phase-tagline">One → Many</div>
         </div>
       </div>
-      <p class="phase-description">Turn one foothold into many options. How far before segmentation stops you?</p>
+      <p class="phase-description">The adversary broadens access through discovery, persistence, and movement across environments.</p>
       <div class="key-question-box">
         <div class="key-question-label">Key Question</div>
-        <div class="key-question-text">How far can we move?</div>
+        <div class="key-question-text">How far did the adversary move?</div>
       </div>
       <div class="expand-indicator">▼</div>
 
-      <div class="expanded-content">
+      <div class="expanded-content" id="expand-details">
         <!-- Attacker Objectives -->
         <div class="content-section tactical-content">
           <div class="section-label">Attacker Objectives</div>
@@ -1059,7 +1132,7 @@
           <div class="goal-item">→ Access file shares</div>
           <div class="goal-item">→ Pivot to cloud (Azure/AWS/GCP)</div>
           <div class="goal-item">→ Compromise K8s clusters</div>
-          <div class="goal-item">→ Access SaaS admin panels</div>
+          <div class="goal-item">→ Pivot across SaaS applications</div>
           <div class="goal-item">→ Establish persistence</div>
         </div>
 
@@ -1114,64 +1187,66 @@
 
         <!-- Framework Overlays -->
         <div class="framework-overlay mitre-overlay">
-          <div class="framework-label mitre">MITRE ATT&CK</div>
-          <div class="framework-tactics">Discovery (TA0007) • Lateral Movement (TA0008) • Persistence (TA0003)</div>
+          <div class="framework-label mitre">MITRE ATT&amp;CK v19.2</div>
+          <div class="framework-tactics">Persistence (TA0003) • Discovery (TA0007) • Lateral Movement (TA0008) • Command and Control (TA0011)</div>
           <div class="framework-tags">
             <span class="framework-tag mitre">T1021 Remote Services</span>
             <span class="framework-tag mitre">T1018 Remote System Discovery</span>
-            <span class="framework-tag mitre">T1083 File Discovery</span>
-            <span class="framework-tag mitre">T1053 Scheduled Tasks</span>
+            <span class="framework-tag mitre">T1083 File and Directory Discovery</span>
+            <span class="framework-tag mitre">T1053 Scheduled Task/Job</span>
+            <span class="framework-tag mitre">T1071 Application Layer Protocol</span>
           </div>
         </div>
 
         <div class="framework-overlay nist-overlay">
           <div class="framework-label nist">NIST CSF 2.0</div>
           <div class="framework-tags">
-            <span class="framework-tag nist">PR.AC-5 Network Segmentation</span>
-            <span class="framework-tag nist">DE.CM-1 Network Monitoring</span>
-            <span class="framework-tag nist">DE.CM-4 Malicious Code Detection</span>
+            <span class="framework-tag nist">PR.IR-01 Network Protection</span>
+            <span class="framework-tag nist">PR.PS-05 Unauthorized Software Prevention</span>
+            <span class="framework-tag nist">DE.CM-01 Network Monitoring</span>
+            <span class="framework-tag nist">DE.CM-09 Endpoint and Runtime Monitoring</span>
           </div>
         </div>
 
         <div class="framework-overlay iso-overlay">
-          <div class="framework-label iso">ISO 27001:2022</div>
+          <div class="framework-label iso">ISO/IEC 27001:2022 Annex A</div>
           <div class="framework-tags">
-            <span class="framework-tag iso">A.8.22 Network Segmentation</span>
-            <span class="framework-tag iso">A.8.16 Monitoring</span>
-            <span class="framework-tag iso">A.8.7 Malware Protection</span>
+            <span class="framework-tag iso">A.8.22 Segregation of Networks</span>
+            <span class="framework-tag iso">A.8.16 Monitoring Activities</span>
+            <span class="framework-tag iso">A.8.7 Protection Against Malware</span>
           </div>
         </div>
 
         <div class="framework-overlay cis-overlay">
-          <div class="framework-label cis">CIS Controls v8</div>
+          <div class="framework-label cis">CIS Controls v8.1</div>
           <div class="framework-tags">
-            <span class="framework-tag cis">12.2 Segmentation</span>
-            <span class="framework-tag cis">13.3 Traffic Filtering</span>
-            <span class="framework-tag cis">10.1 EDR</span>
-            <span class="framework-tag cis">8.5 Audit Log Management</span>
+            <span class="framework-tag cis">12.2/13.4 Segmentation and Filtering</span>
+            <span class="framework-tag cis">13.2/13.7 Host Detection and Prevention</span>
+            <span class="framework-tag cis">13.3/13.6 Network Detection and Flow Logs</span>
+            <span class="framework-tag cis">8.11/13.1 Log Review and Alerting</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ASCEND -->
-    <div class="phase-card" data-phase="ascend" style="--phase-color: #4ECDC4; --phase-color-bg: rgba(78, 205, 196, 0.08); --phase-color-30: rgba(78, 205, 196, 0.3);">
+    <div class="phase-card" data-phase="ascend" role="button" tabindex="0" aria-expanded="false" aria-controls="ascend-details" style="--phase-color: #4ECDC4; --phase-color-bg: rgba(78, 205, 196, 0.08); --phase-color-30: rgba(78, 205, 196, 0.3);">
       <div class="phase-number">03</div>
       <div class="phase-header">
         <div class="phase-badge">A</div>
         <div>
           <div class="phase-title">ASCEND</div>
-          <div class="phase-tagline">User → Admin</div>
+          <div class="phase-tagline">User → Administrator</div>
         </div>
       </div>
-      <p class="phase-description">Get real power. Controls shift from blocking access to limiting what admin can do.</p>
+      <p class="phase-description">The adversary gains privileged identities, credentials, roles, or administrative control.</p>
       <div class="key-question-box">
         <div class="key-question-label">Key Question</div>
-        <div class="key-question-text">Did we get real power?</div>
+        <div class="key-question-text">Did the adversary gain privileged control?</div>
       </div>
       <div class="expand-indicator">▼</div>
 
-      <div class="expanded-content">
+      <div class="expanded-content" id="ascend-details">
         <!-- Attacker Objectives -->
         <div class="content-section tactical-content">
           <div class="section-label">Attacker Objectives</div>
@@ -1227,53 +1302,56 @@
         <!-- CISO Questions -->
         <div class="content-section executive-content">
           <div class="section-label">Questions to Ask</div>
-          <div class="ciso-question">"Did you reach any real Admin positions?"</div>
+          <div class="ciso-question">"Did the adversary reach any privileged roles or administration planes?"</div>
           <div class="ciso-question">"Which privileged accounts were compromised?"</div>
         </div>
 
         <!-- Framework Overlays -->
         <div class="framework-overlay mitre-overlay">
-          <div class="framework-label mitre">MITRE ATT&CK</div>
+          <div class="framework-label mitre">MITRE ATT&amp;CK v19.2</div>
           <div class="framework-tactics">Privilege Escalation (TA0004) • Credential Access (TA0006)</div>
           <div class="framework-tags">
-            <span class="framework-tag mitre">T1068 Exploitation for PrivEsc</span>
-            <span class="framework-tag mitre">T1548 Abuse Elevation</span>
-            <span class="framework-tag mitre">T1003 Credential Dumping</span>
-            <span class="framework-tag mitre">T1558 Kerberos Tickets</span>
+            <span class="framework-tag mitre">T1068 Exploitation for Privilege Escalation</span>
+            <span class="framework-tag mitre">T1548 Abuse Elevation Control Mechanism</span>
+            <span class="framework-tag mitre">T1003 OS Credential Dumping</span>
+            <span class="framework-tag mitre">T1558 Steal or Forge Kerberos Tickets</span>
           </div>
         </div>
 
         <div class="framework-overlay nist-overlay">
           <div class="framework-label nist">NIST CSF 2.0</div>
           <div class="framework-tags">
-            <span class="framework-tag nist">PR.AC-4 Access Control</span>
-            <span class="framework-tag nist">PR.DS-5 Data Protection</span>
-            <span class="framework-tag nist">DE.CM-3 Personnel Monitoring</span>
+            <span class="framework-tag nist">PR.AA-01 Identity and Credential Management</span>
+            <span class="framework-tag nist">PR.AA-04 Identity Assertion Protection</span>
+            <span class="framework-tag nist">PR.AA-05 Least Privilege</span>
+            <span class="framework-tag nist">DE.CM-03 Activity and Usage Monitoring</span>
           </div>
         </div>
 
         <div class="framework-overlay iso-overlay">
-          <div class="framework-label iso">ISO 27001:2022</div>
+          <div class="framework-label iso">ISO/IEC 27001:2022 Annex A</div>
           <div class="framework-tags">
-            <span class="framework-tag iso">A.8.2 Privileged Access</span>
-            <span class="framework-tag iso">A.5.17 Auth Info</span>
+            <span class="framework-tag iso">A.8.2 Privileged Access Rights</span>
+            <span class="framework-tag iso">A.5.17 Authentication Information</span>
             <span class="framework-tag iso">A.5.18 Access Rights</span>
+            <span class="framework-tag iso">A.8.16 Monitoring Activities</span>
           </div>
         </div>
 
         <div class="framework-overlay cis-overlay">
-          <div class="framework-label cis">CIS Controls v8</div>
+          <div class="framework-label cis">CIS Controls v8.1</div>
           <div class="framework-tags">
-            <span class="framework-tag cis">5.4 Restrict Admin Privileges</span>
-            <span class="framework-tag cis">6.1 Access Control</span>
-            <span class="framework-tag cis">5.2 Unique Passwords</span>
+            <span class="framework-tag cis">5.4 Dedicated Administrator Accounts</span>
+            <span class="framework-tag cis">6.5/6.8 Administrative MFA and RBAC</span>
+            <span class="framework-tag cis">12.8 Dedicated Administrative Resources</span>
+            <span class="framework-tag cis">8.5/8.11 Detailed Logs and Review</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- RULE -->
-    <div class="phase-card" data-phase="rule" style="--phase-color: #E63946; --phase-color-bg: rgba(230, 57, 70, 0.08); --phase-color-30: rgba(230, 57, 70, 0.3);">
+    <div class="phase-card" data-phase="rule" role="button" tabindex="0" aria-expanded="false" aria-controls="rule-details" style="--phase-color: #E63946; --phase-color-bg: rgba(230, 57, 70, 0.08); --phase-color-30: rgba(230, 57, 70, 0.3);">
       <div class="phase-number">04</div>
       <div class="phase-header">
         <div class="phase-badge">R</div>
@@ -1282,23 +1360,23 @@
           <div class="phase-tagline">Access → Impact</div>
         </div>
       </div>
-      <p class="phase-description">Use that power to shape reality. The phase that should keep you up at night.</p>
+      <p class="phase-description">The adversary can collect or exfiltrate data, disrupt operations, or create material impact.</p>
       <div class="key-question-box">
         <div class="key-question-label">Key Question</div>
-        <div class="key-question-text">What can we actually do?</div>
+        <div class="key-question-text">What impact can the adversary create?</div>
       </div>
       <div class="expand-indicator">▼</div>
 
-      <div class="expanded-content">
+      <div class="expanded-content" id="rule-details">
         <!-- Attacker Objectives -->
         <div class="content-section tactical-content">
           <div class="section-label">Attacker Objectives</div>
-          <div class="goal-item">→ Quiet persistence (survive remediation)</div>
-          <div class="goal-item">→ Own production environments</div>
-          <div class="goal-item">→ Stage future extortion</div>
-          <div class="goal-item">→ Exfiltrate data</div>
-          <div class="goal-item">→ Deploy ransomware/wiper</div>
-          <div class="goal-item">→ Supply chain compromise</div>
+          <div class="goal-item">→ Collect sensitive data</div>
+          <div class="goal-item">→ Stage data for exfiltration</div>
+          <div class="goal-item">→ Exfiltrate through external channels</div>
+          <div class="goal-item">→ Encrypt, alter, or delete data</div>
+          <div class="goal-item">→ Inhibit recovery</div>
+          <div class="goal-item">→ Disrupt production or critical services</div>
         </div>
 
         <!-- Defensive Controls -->
@@ -1336,61 +1414,65 @@
           <div class="detection-tags">
             <span class="detection-tag">Large data transfers external</span>
             <span class="detection-tag">DNS tunneling patterns</span>
-            <span class="detection-tag">Shadow admin accounts</span>
+            <span class="detection-tag">Archive staging and bulk sensitive-data reads</span>
             <span class="detection-tag">Backup deletion/modification</span>
-            <span class="detection-tag">Unexpected certificate issuance</span>
+            <span class="detection-tag">Mass file encryption or deletion</span>
+            <span class="detection-tag">Unexpected service disruption</span>
           </div>
         </div>
 
         <!-- CISO Questions -->
         <div class="content-section executive-content">
           <div class="section-label">Questions to Ask</div>
-          <div class="ciso-question">"If you chose to Rule today, what could you change or destroy?"</div>
+          <div class="ciso-question">"What could the adversary steal, change, encrypt, or disrupt today?"</div>
           <div class="ciso-question">"What is the demonstrated business impact?"</div>
         </div>
 
         <!-- Framework Overlays -->
         <div class="framework-overlay mitre-overlay">
-          <div class="framework-label mitre">MITRE ATT&CK</div>
+          <div class="framework-label mitre">MITRE ATT&amp;CK v19.2</div>
           <div class="framework-tactics">Collection (TA0009) • Exfiltration (TA0010) • Impact (TA0040)</div>
           <div class="framework-tags">
+            <span class="framework-tag mitre">T1213 Data from Information Repositories</span>
+            <span class="framework-tag mitre">T1567 Exfiltration Over Web Service</span>
             <span class="framework-tag mitre">T1486 Data Encrypted for Impact</span>
-            <span class="framework-tag mitre">T1490 Inhibit Recovery</span>
-            <span class="framework-tag mitre">T1567 Exfil Over Web</span>
-            <span class="framework-tag mitre">T1495 Firmware Corruption</span>
+            <span class="framework-tag mitre">T1490 Inhibit System Recovery</span>
           </div>
         </div>
 
         <div class="framework-overlay nist-overlay">
           <div class="framework-label nist">NIST CSF 2.0</div>
           <div class="framework-tags">
-            <span class="framework-tag nist">PR.DS-1/2 Data Protection</span>
-            <span class="framework-tag nist">PR.IP-4 Backups</span>
-            <span class="framework-tag nist">RC.RP-1 Recovery Planning</span>
+            <span class="framework-tag nist">ID.AM-05/07 Data Criticality and Inventory</span>
+            <span class="framework-tag nist">PR.DS-01/02 Data Protection</span>
+            <span class="framework-tag nist">PR.DS-11 Protected and Tested Backups</span>
+            <span class="framework-tag nist">RC.RP-03/05 Recovery Integrity</span>
           </div>
         </div>
 
         <div class="framework-overlay iso-overlay">
-          <div class="framework-label iso">ISO 27001:2022</div>
+          <div class="framework-label iso">ISO/IEC 27001:2022 Annex A</div>
           <div class="framework-tags">
-            <span class="framework-tag iso">A.8.13 Backup</span>
-            <span class="framework-tag iso">A.5.30 Business Continuity</span>
+            <span class="framework-tag iso">A.8.13 Information Backup</span>
+            <span class="framework-tag iso">A.5.30 ICT Readiness for Business Continuity</span>
             <span class="framework-tag iso">A.8.12 Data Leakage Prevention</span>
+            <span class="framework-tag iso">A.8.24 Use of Cryptography</span>
           </div>
         </div>
 
         <div class="framework-overlay cis-overlay">
-          <div class="framework-label cis">CIS Controls v8</div>
+          <div class="framework-label cis">CIS Controls v8.1</div>
           <div class="framework-tags">
-            <span class="framework-tag cis">11.2-11.4 Data Recovery</span>
-            <span class="framework-tag cis">3.13 DLP</span>
-            <span class="framework-tag cis">17.1-17.9 Incident Response</span>
+            <span class="framework-tag cis">3.7/3.13/3.14 Data Protection</span>
+            <span class="framework-tag cis">11.2-11.5 Backup and Recovery</span>
+            <span class="framework-tag cis">17.4/17.7 Incident Response</span>
+            <span class="framework-tag cis">17.2/17.6 Incident Communications</span>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
+  </main>
 
   <!-- Footer -->
   <div class="footer">
@@ -1408,19 +1490,19 @@
 
   <!-- Quick Nav -->
   <div class="quick-nav">
-    <div class="quick-nav-item" data-target="break">
+    <div class="quick-nav-item" data-target="break" role="button" tabindex="0" aria-label="Open Break phase">
       <div class="quick-nav-badge" style="background-color: rgba(255, 107, 53, 0.15); border: 1px solid #FF6B35; color: #FF6B35;">B</div>
       <span class="quick-nav-label">BREAK</span>
     </div>
-    <div class="quick-nav-item" data-target="expand">
+    <div class="quick-nav-item" data-target="expand" role="button" tabindex="0" aria-label="Open Expand phase">
       <div class="quick-nav-badge" style="background-color: rgba(247, 201, 75, 0.15); border: 1px solid #F7C94B; color: #F7C94B;">E</div>
       <span class="quick-nav-label">EXPAND</span>
     </div>
-    <div class="quick-nav-item" data-target="ascend">
+    <div class="quick-nav-item" data-target="ascend" role="button" tabindex="0" aria-label="Open Ascend phase">
       <div class="quick-nav-badge" style="background-color: rgba(78, 205, 196, 0.15); border: 1px solid #4ECDC4; color: #4ECDC4;">A</div>
       <span class="quick-nav-label">ASCEND</span>
     </div>
-    <div class="quick-nav-item" data-target="rule">
+    <div class="quick-nav-item" data-target="rule" role="button" tabindex="0" aria-label="Open Rule phase">
       <div class="quick-nav-badge" style="background-color: rgba(230, 57, 70, 0.15); border: 1px solid #E63946; color: #E63946;">R</div>
       <span class="quick-nav-label">RULE</span>
     </div>
@@ -1430,7 +1512,8 @@
   <div class="credit">
     <span class="credit-line">BEAR Framework concept by <a href="https://www.linkedin.com/in/d0znpp/" target="_blank" rel="noopener">Ivan Novikov</a> (Wallarm)</span>
     <span class="credit-separator">•</span>
-    <span class="credit-line">Interactive tool built by <a href="https://www.linkedin.com/in/christophersix-futureproofwithsix/" target="_blank" rel="noopener">Christopher Six</a></span>
+    <span class="credit-line">Mapping and interactive tool maintained by <a href="https://github.com/christophersix66" target="_blank" rel="noopener">Christopher Six (@christophersix66)</a></span>
+    <span class="version-line">Version 2.0 • mappings reviewed 2026-09-02 • see <a href="MAPPINGS.md">MAPPINGS.md</a> for scope and sources</span>
   </div>
 
   <script>
@@ -1450,18 +1533,33 @@
     const clearBtn = document.getElementById('clearOverlays');
     const quickNavItems = document.querySelectorAll('.quick-nav-item');
 
-    // Phase Card Click
+    // Phase interaction
+    function setPhase(phase, shouldScroll = false) {
+      phaseCards.forEach(card => {
+        const isActive = card.dataset.phase === phase;
+        card.classList.toggle('active', isActive);
+        card.setAttribute('aria-expanded', String(isActive));
+      });
+      activePhase = phase;
+
+      if (shouldScroll && phase) {
+        document.querySelector(`[data-phase="${phase}"]`)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    }
+
+    function togglePhase(card) {
+      setPhase(activePhase === card.dataset.phase ? null : card.dataset.phase);
+    }
+
     phaseCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const phase = card.dataset.phase;
-        
-        if (activePhase === phase) {
-          card.classList.remove('active');
-          activePhase = null;
-        } else {
-          phaseCards.forEach(c => c.classList.remove('active'));
-          card.classList.add('active');
-          activePhase = phase;
+      card.addEventListener('click', () => togglePhase(card));
+      card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          togglePhase(card);
         }
       });
     });
@@ -1477,8 +1575,12 @@
       btn.addEventListener('click', () => {
         const mode = btn.dataset.mode;
         
-        modeBtns.forEach(b => b.classList.remove('active'));
+        modeBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         
         document.body.classList.remove('mode-tactical', 'mode-defensive', 'mode-executive');
         document.body.classList.add(`mode-${mode}`);
@@ -1496,6 +1598,7 @@
         activeOverlays[framework] = !activeOverlays[framework];
         
         btn.classList.toggle('active');
+        btn.setAttribute('aria-pressed', String(activeOverlays[framework]));
         
         // Toggle overlay visibility
         document.querySelectorAll(`.${framework}-overlay`).forEach(overlay => {
@@ -1514,7 +1617,10 @@
         activeOverlays[key] = false;
       });
       
-      overlayBtns.forEach(btn => btn.classList.remove('active'));
+      overlayBtns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
       document.querySelectorAll('.framework-overlay').forEach(overlay => {
         overlay.classList.remove('visible');
       });
@@ -1523,16 +1629,18 @@
 
     // Quick Nav
     quickNavItems.forEach(item => {
-      item.addEventListener('click', () => {
+      const openTarget = () => {
         const target = item.dataset.target;
-        const targetCard = document.querySelector(`[data-phase="${target}"]`);
-        
-        if (targetCard) {
-          phaseCards.forEach(c => c.classList.remove('active'));
-          targetCard.classList.add('active');
-          activePhase = target;
-          
-          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (document.querySelector(`[data-phase="${target}"]`)) {
+          setPhase(target, true);
+        }
+      };
+
+      item.addEventListener('click', openTarget);
+      item.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openTarget();
         }
       });
     });
@@ -1546,18 +1654,11 @@
         const card = document.querySelector(`[data-phase="${phase}"]`);
         
         if (card) {
-          if (activePhase === phase) {
-            card.classList.remove('active');
-            activePhase = null;
-          } else {
-            phaseCards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-            activePhase = phase;
-          }
+          togglePhase(card);
         }
       }
       
-      // T, D, E for modes
+      // T, D, X for modes
       if (e.key.toLowerCase() === 't') {
         document.querySelector('[data-mode="tactical"]').click();
       } else if (e.key.toLowerCase() === 'd') {
@@ -1579,8 +1680,7 @@
       
       // Escape to close all
       if (e.key === 'Escape') {
-        phaseCards.forEach(c => c.classList.remove('active'));
-        activePhase = null;
+        setPhase(null);
       }
     });
   </script>

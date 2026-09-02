@@ -2,66 +2,61 @@
 
 **Break → Expand → Ascend → Rule**
 
-A practitioner's model for attack progression when speed matters.
-
----
+A concise practitioner model for communicating attacker progression when speed and shared context matter.
 
 ## What is BEAR?
 
-BEAR is a simplified framework for understanding and communicating attacker progression during active incidents, red team debriefs, and executive briefings.
+BEAR reduces an intrusion to four operational questions:
 
-| Phase | Question | Transition |
-|-------|----------|------------|
-| **B**reak | Did they get in? | Outside → Inside |
-| **E**xpand | How far did they move? | One → Many |
-| **A**scend | Did they get real power? | User → Admin |
-| **R**ule | What can they do now? | Access → Impact |
+| Phase | Operational question | Transition | Representative ATT&CK tactics |
+|---|---|---|---|
+| **Break** | Did the adversary get in? | Outside → Inside | Initial Access, Execution |
+| **Expand** | How far did the adversary move? | One → Many | Persistence, Discovery, Lateral Movement, Command and Control |
+| **Ascend** | Did the adversary gain privileged control? | User → Administrator | Privilege Escalation, Credential Access |
+| **Rule** | What impact can the adversary create? | Access → Impact | Collection, Exfiltration, Impact |
 
-### Why BEAR?
+BEAR is a communication layer, not a replacement for MITRE ATT&CK, the Lockheed Martin Cyber Kill Chain, NIST CSF, ISO/IEC 27001, or CIS Controls. Intrusions are not always linear: attackers can revisit phases, pursue several phases in parallel, or achieve impact without completing every phase.
 
-MITRE ATT&CK is perfect for building detections. Lockheed Kill Chain is great for campaign analysis. But in the heat of an engagement or incident — they're overhead, not guidance. Too many boxes. Not enough focus.
+## Interactive tool
 
-> **BEAR is the "cut through the noise" layer — MITRE is where you go for comprehensive mapping.**
-> 
-> The framework's value is in the speed and focus, not exhaustive coverage.
+Open [`bear-framework.html`](./bear-framework.html) directly in a browser. It is a single-file, offline-capable reference with no build step and no runtime dependencies.
 
----
+The printable reference is [`BEAR-Framework-Defensive-Controls-v2.0.pdf`](./output/pdf/BEAR-Framework-Defensive-Controls-v2.0.pdf).
 
-## Interactive Tool
+- **Tactical view** — attacker objectives and representative behaviors
+- **Defensive view** — objectives, priority controls, and detection opportunities
+- **Executive view** — business-focused controls and questions
+- **Framework overlays** — practitioner alignments to MITRE ATT&CK v19.2, NIST CSF 2.0, ISO/IEC 27001:2022 Annex A, and CIS Controls v8.1
+- **Keyboard shortcuts** — `T`, `D`, or `X` for views; `1`–`4` for phases; `M`, `N`, `I`, or `C` for overlays; `Esc` to collapse a phase
 
-The included HTML file (`bear-framework.html`) is a single-page, offline-capable reference tool with:
+The detailed alignment rationale and sources are maintained in [`MAPPINGS.md`](./MAPPINGS.md). The mappings are representative and non-authoritative; they are not one-to-one equivalences or certification evidence.
 
-- **Three View Modes**
-  - *Tactical* — Attacker objectives (red team lens)
-  - *Defensive* — Controls + detections (blue team lens)
-  - *Executive* — Business risk questions (leadership lens)
+## When to use it
 
-- **Framework Overlays** — Toggle mappings to MITRE ATT&CK, NIST CSF 2.0, ISO 27001:2022, and CIS Controls v8
+| Scenario | How BEAR helps |
+|---|---|
+| Active incident | Establish a fast, shared view of attacker position, reachable assets, and likely impact |
+| Red-team debrief | Organize findings by operational progression and demonstrated impact |
+| Control validation | Test whether prevention, detection, containment, and recovery capabilities interrupt each phase |
+| Executive briefing | Translate technical observations into risk and decision points |
 
-- **Keyboard Shortcuts** — `T/D/X` for modes, `1-4` for phases, `M/N/I/C` for overlays
+## Version 2.0 review
 
-No dependencies. No build step. Just open it in a browser.
+The September 2026 review:
 
----
+- migrated stale NIST CSF 1.1 identifiers to the CSF 2.0 Core structure;
+- updated MITRE ATT&CK names and mappings to Enterprise ATT&CK v19.2;
+- tightened ISO/IEC 27001:2022 Annex A and CIS Controls v8.1 safeguard alignments;
+- documented mapping scope, limitations, and authoritative sources;
+- removed the remote font request so the HTML is genuinely offline-capable;
+- improved keyboard and screen-reader behavior; and
+- aligned repository and document attribution to Christopher Six's profiles.
 
-## When to Use
+## Credits and maintenance
 
-| Scenario | How BEAR Helps |
-|----------|----------------|
-| 🔴 Active Incident | Quickly assess attacker position and risk |
-| 🟡 Red Team Debrief | Structure findings by impact, not just technique |
-| 🟢 Control Validation | Test defenses at each phase, find gaps |
-| 🔵 Executive Briefing | Translate technical status to business risk |
-
----
-
-## Credits
-
-**BEAR Framework Concept:** Ivan Novikov ([Wallarm](https://www.wallarm.com))  
-**Defensive Control Mapping & Tool:** Christopher Six
-
----
+- **BEAR Framework concept:** Ivan Novikov ([LinkedIn](https://www.linkedin.com/in/d0znpp/), Wallarm), as credited by the original project
+- **Defensive control mapping, interactive tool, and repository maintenance:** [Christopher Six](https://github.com/christophersix66) ([LinkedIn](https://www.linkedin.com/in/christophersix-futureproofwithsix/))
 
 ## License
 
-MIT — Use it, fork it, make it yours.
+[MIT](./LICENSE) — use it, fork it, and adapt it subject to the license terms.
